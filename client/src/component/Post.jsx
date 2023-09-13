@@ -25,7 +25,7 @@ function Post(){
         <div className='mb-3' key={post._id}>
           <div class="card">
             <img src={post.image} alt="Image format"/>
-            <div class="card-body">
+            <div class="card-body" id='post-card-body'>
               <h5>{post.title}</h5>
               <p class="card-text">{post.description}</p>
               <div className='d-flex justify-content-between align-items-center'>

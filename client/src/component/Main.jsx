@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Post from './Post'
 import Axios from 'axios'
 
+
 function Main(){
 
   const [title, setTitle] = useState('');
@@ -33,30 +34,32 @@ function Main(){
 
 
   return (
-    <div className='p-3 border mt-3 rounded' style={{height:'100%'}}>
+    <div className=''>
+        <div className='p-2 border mt-3 rounded' style={{height:'100%'}}>
 
-        <div class="card mb-4">
-          <div class="card-header">
-            <strong>New Post</strong>
+          <div class="card mb-4">
+            <div class="card-header text-light" id='card-head'>
+              <strong>New Post</strong>
+            </div>
+            <div class="card-body" id='card-body'>
+              <div className='px-3'>
+                <input placeholder='Title here...' className='form-control' type="text" name="" id="" value={title} onChange={(e) => setTitle(e.target.value)} />
+              </div>
+              <div className='p-3'>
+                <textarea placeholder='Description here...' className='form-control' name="" id="" cols="30" rows="5" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+              </div>
+              <div className='px-3 d-flex justify-content-between'>
+                  <label className='form-label hand' htmlFor="files">Select Image</label>
+                  <input type="file" name="" id="files" className='form-control form-control-sm' onChange={(e) => setImagePath(e.target.files[0].name)}/>
+                  <button className='btn btn-primary px-3' onClick={handlePostClick}>Post</button>
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <div className='px-3'>
-              <input className='form-control' type="text" name="" id="" value={title} onChange={(e) => setTitle(e.target.value)} />
-            </div>
-            <div className='p-3'>
-              <textarea className='form-control' name="" id="" cols="30" rows="5" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            </div>
-            <div className='px-3 d-flex justify-content-between'>
-                <label className='form-label' htmlFor="files">Select Image</label>
-                <input type="file" name="" id="files" className='form-control form-control-sm' onChange={(e) => setImagePath(e.target.files[0].name)}/>
-                <button className='btn btn-primary px-3' onClick={handlePostClick}>Post</button>
-            </div>
+          <div>
+            <h5>My Posts</h5>
+            <Post/>
           </div>
-        </div>
-        <div>
-          <h5>My Posts</h5>
-          <Post/>
-        </div>
+      </div>
     </div>
   )
 }

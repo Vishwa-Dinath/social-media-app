@@ -4,6 +4,8 @@ const Post = require('./models/postModel')
 const app = express();
 const cors = require('cors')
 const multer = require('multer')
+const path = require('path')
+const fs = require('fs')
 
 const corsOptions ={
     origin:'*',
@@ -45,4 +47,42 @@ mongoose.connect('mongodb+srv://vishwadinath97:MongoDB@dvd.lih33lt.mongodb.net/p
 }).catch((error)=>{
     console.log(error);
 })
+
+
+//----------------------
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/uploads/');
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      cb(null, uniqueSuffix + path.extname(file.originalname)); 
+    },
+  });
+  
+  const upload = multer({ storage: storage });
+  
+  app.post('/posts', upload.single('image'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+      }
+  
+      const imageUrl = '/uploads/' + req.file.filename;
+  
+      const post = await Post.create({
+        title: req.body.title,
+        description: req.body.description,
+        image: imageUrl,
+      });
+  
+      res.status(200).json({ post });
+    } catch (error) {
+      console.error('Error:', error.message);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  
+  // Serve uploaded images publicly
+  app.use('/uploads', express.static('public/uploads'));
 

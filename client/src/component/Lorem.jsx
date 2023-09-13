@@ -18,14 +18,14 @@ function Lorem(){
   },[])
 
   return (
-    <div className="p-1" style={{height:'100%'}}>
+    <div id='lorem-container' className="p-1" style={{height:'100%'}}>
         <div className='p-2 rounded-2 border' style={{height:'100%'}}>
           <h4 className='mb-4 text-center'>Lorem Posts</h4>
           {loremData.map((lorem)=>(
             <div key={lorem.id} className='d-flex justify-content-center gap-2 p-2'>
               <div class="card">
                   <img src={lorem.download_url} alt="Invalid format" srcset="" />
-                  <div class="card-body">
+                  <div class="card-body hand">
                       <p class="card-text"><strong>Post by : </strong>{lorem.author}</p>
                   </div>
               </div>
