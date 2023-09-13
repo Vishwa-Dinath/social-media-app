@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const Post = require('./models/postModel')
 const app = express();
 const cors = require('cors')
+const multer = require('multer')
+
 const corsOptions ={
     origin:'*',
     credentials:true,
@@ -43,3 +45,4 @@ mongoose.connect('mongodb+srv://vishwadinath97:MongoDB@dvd.lih33lt.mongodb.net/p
 }).catch((error)=>{
     console.log(error);
 })
+
